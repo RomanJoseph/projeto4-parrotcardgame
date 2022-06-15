@@ -42,3 +42,7 @@ header h1{
 .capa{
     height: 18vh;
 }
+
+.sumir{
+    display: none;
+}
