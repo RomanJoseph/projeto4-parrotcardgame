@@ -9,37 +9,24 @@ function numeroDeCartas() {
 }
 
 function createCard() {
-    let conjunto = document.querySelector(".cards");
+    let conjunto = document.querySelector(".cards")
     let escolha = numeroDeCartas()
 
     for (let i = 0; i < escolha; i++) {
-        let cartaCriada = document.createElement("div");
-        cartaCriada.classList.add("card");
-        cartaCriada.addEventListener("click",trocaImagem);
+        let cartaCriada = document.createElement("div")
+        cartaCriada.classList.add("card")
+        cartaCriada.addEventListener("click", trocaImagem)
+        cartaCriada.addEventListener("click", checaPar)
 
-        let imagemCriada = document.createElement("img");
-        imagemCriada.src = "images/front.png";
-        imagemCriada.classList.add("capa");
+        let imagemCriada = document.createElement("img")
+        imagemCriada.src = "images/front.png"
+        imagemCriada.classList.add("capa")
         imagemCriada.id = i
 
-        cartaCriada.appendChild(imagemCriada);
-        conjunto.appendChild(cartaCriada);
+        cartaCriada.appendChild(imagemCriada)
+        conjunto.appendChild(cartaCriada)
     }
 
-}
-
-function sorteio (){
-    let lista = [0,1,2,3,4,5,6,7,8,9,10,11,12,13]
-    let listaEmbaralhada = []
-
-    while(listaEmbaralhada.length < lista.length){
-        r = Math.floor(Math.random()*14)
-        if(!(listaEmbaralhada.includes(r))){
-            listaEmbaralhada.push(r)
-        }
-    }
-
-    return listaEmbaralhada
 }
 
 function trocaImagem(event) {
@@ -47,8 +34,63 @@ function trocaImagem(event) {
     let id = elemento.id
 
     let carta = document.getElementById(id)
-    carta.src = `images/cartas/${sorteio_cartas[id]}.gif`
+
+    if (sorteio_cartas[id] > 6) {
+        carta.src = `images/cartas/${sorteio_cartas[id] - 7}.gif`
+    } else {
+        carta.src = `images/cartas/${sorteio_cartas[id]}.gif`
+    }
+}
+
+function sorteio() {
+    let lista = []
+    let listaEmbaralhada1 = []
+    let listaEmbaralhada2 = []
+
+    let tamanhoSorteio = document.querySelectorAll(".card").length
+    for (let i = 0; i < (tamanhoSorteio / 2); i++) {
+        lista.push(i)
+    }
+
+    while (listaEmbaralhada1.length < lista.length) {
+        r = Math.floor(Math.random() * lista.length)
+        if (!(listaEmbaralhada1.includes(r))) {
+            listaEmbaralhada1.push(r)
+        }
+    }
+
+    while (listaEmbaralhada2.length < lista.length) {
+        r = Math.floor(Math.random() * lista.length)
+        if (!(listaEmbaralhada2.includes(r))) {
+            listaEmbaralhada2.push(r)
+        }
+    }
+
+    let listaTotal = listaEmbaralhada1.concat(listaEmbaralhada2)
+
+    return listaTotal
+}
+
+function checaPar(event) {
+    let cartaClicada = event.target
+    let id = cartaClicada.id
+
+    par.push(id)
+
+    if (par.length == 2) {
+        item1 = document.getElementById(par[0])
+        item2 = document.getElementById(par[1])
+
+        if (item1.src == item2.src) {
+            alert("Acertou")
+        }
+    }
+
+    if (par.length == 2) {
+        par.length = 0
+    }
 }
 
 createCard()
 sorteio_cartas = sorteio()
+let par = []
