@@ -27,8 +27,8 @@ header h1{
 }
 
 .card{
-    width: 10vw;
-    height: 23vh;
+    width: 120px;
+    height: 150px;
     border-radius: 5px;
     background-color:#A7E9AF;
     display: flex;
@@ -40,7 +40,7 @@ header h1{
 }
 
 .capa{
-    height: 18vh;
+    height: 100px;
 }
 
 .sumir{

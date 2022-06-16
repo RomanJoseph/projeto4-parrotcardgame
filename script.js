@@ -17,7 +17,8 @@ function createCard() {
         cartaCriada.classList.add("card")
         cartaCriada.addEventListener("click", trocaImagem)
         cartaCriada.addEventListener("click", checaPar)
-
+        cartaCriada.addEventListener("click", victory)
+        
         let imagemCriada = document.createElement("img")
         imagemCriada.src = "images/front.png"
         imagemCriada.classList.add("capa")
@@ -81,16 +82,35 @@ function checaPar(event) {
         item1 = document.getElementById(par[0])
         item2 = document.getElementById(par[1])
 
-        if (item1.src == item2.src) {
-            alert("Acertou")
+        if (item1.src == item2.src && item1.id != item2.id) {
+            item1.classList.add("Acertou")
+            item2.classList.add("Acertou")
+        } else {
+            const espera = setTimeout(function Wait() {
+                if (!(item1.classList.contains("Acertou"))) {
+                    item1.src = "images/front.png"
+                }
+                if (!(item2.classList.contains("Acertou"))) {
+                    item2.src = "images/front.png"
+                }
+            }, 1000)
         }
     }
-
-    if (par.length == 2) {
+    if (par.length === 2) {
         par.length = 0
+    }
+}
+
+function victory(){
+    acertos = document.querySelectorAll(".Acertou")
+    cartasTotais = document.querySelectorAll(".card")
+    numeroDeJogadas ++
+    if(acertos.length == cartasTotais.length){
+        alert(`VOCÊ GANHOU EM ${numeroDeJogadas} JOGADAS!`)
     }
 }
 
 createCard()
 sorteio_cartas = sorteio()
 let par = []
+let numeroDeJogadas = 0
