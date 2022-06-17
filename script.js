@@ -15,19 +15,18 @@ function createCard() {
     for (let i = 0; i < escolha; i++) {
         let cartaCriada = document.createElement("div")
         cartaCriada.classList.add("card")
-        cartaCriada.addEventListener("click", trocaImagem)
-        cartaCriada.addEventListener("click", checaPar)
-        cartaCriada.addEventListener("click", victory)
-        
+
         let imagemCriada = document.createElement("img")
         imagemCriada.src = "images/front.png"
         imagemCriada.classList.add("capa")
         imagemCriada.id = i
+        imagemCriada.addEventListener("click", trocaImagem)
+        imagemCriada.addEventListener("click", checaPar)
+        imagemCriada.addEventListener("click", victory)
 
         cartaCriada.appendChild(imagemCriada)
         conjunto.appendChild(cartaCriada)
     }
-
 }
 
 function trocaImagem(event) {
@@ -41,6 +40,7 @@ function trocaImagem(event) {
     } else {
         carta.src = `images/cartas/${sorteio_cartas[id]}.gif`
     }
+
 }
 
 function sorteio() {
@@ -79,6 +79,7 @@ function checaPar(event) {
     par.push(id)
 
     if (par.length == 2) {
+
         item1 = document.getElementById(par[0])
         item2 = document.getElementById(par[1])
 
@@ -96,21 +97,32 @@ function checaPar(event) {
             }, 1000)
         }
     }
+
     if (par.length === 2) {
         par.length = 0
+        click = 0
     }
 }
 
-function victory(){
+function victory() {
     acertos = document.querySelectorAll(".Acertou")
     cartasTotais = document.querySelectorAll(".card")
-    numeroDeJogadas ++
-    if(acertos.length == cartasTotais.length){
+    numeroDeJogadas++
+    if (acertos.length == cartasTotais.length) {
         alert(`VOCÊ GANHOU EM ${numeroDeJogadas} JOGADAS!`)
     }
 }
 
-createCard()
+function syncDelay(milliseconds) {
+    var start = new Date().getTime();
+    var end = 0;
+    while ((end - start) < milliseconds) {
+        end = new Date().getTime();
+    }
+}
+
+createCard();
 sorteio_cartas = sorteio()
 let par = []
 let numeroDeJogadas = 0
+let click = 0
