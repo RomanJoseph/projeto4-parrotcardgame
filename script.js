@@ -72,7 +72,7 @@ function sorteio() {
     return listaTotal
 }
 
-function checaPar(event) {
+/*function checaPar(event) {
     let cartaClicada = event.target
     let id = cartaClicada.id
 
@@ -102,7 +102,40 @@ function checaPar(event) {
         par.length = 0
         click = 0
     }
+}*/
+
+function checaPar(event) {
+    let cartaClicada = event.target
+    let id = cartaClicada.id
+
+    par.push(id)
+
+    if (par.length == 2) {
+
+        item1 = document.getElementById(par[0])
+        item2 = document.getElementById(par[1])
+
+        if (item1.src == item2.src && item1.id != item2.id) {
+            item1.classList.add("Acertou")
+            item2.classList.add("Acertou")
+        } else {
+            const espera = setTimeout(function Wait() {
+                itens = document.querySelectorAll("img")
+                for (let i = 0; i < itens.length; i++) {
+                    if (!(itens[i].classList.contains("Acertou"))) {
+                        itens[i].src = "images/front.png"
+                    }
+                }
+            }, 1000)
+        }
+    }
+
+    if (par.length === 2) {
+        par.length = 0
+        click = 0
+    }
 }
+
 
 function victory() {
     acertos = document.querySelectorAll(".Acertou")
