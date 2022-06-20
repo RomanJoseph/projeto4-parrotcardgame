@@ -104,6 +104,7 @@ function sorteio() {
     }
 }*/
 
+
 function checaPar(event) {
     let cartaClicada = event.target
     let id = cartaClicada.id
@@ -138,13 +139,16 @@ function checaPar(event) {
 
 
 function victory() {
-    acertos = document.querySelectorAll(".Acertou")
-    cartasTotais = document.querySelectorAll(".card")
-    numeroDeJogadas++
-    if (acertos.length == cartasTotais.length) {
-        alert(`VOCÊ GANHOU EM ${numeroDeJogadas} JOGADAS!`)
-    }
+    const intervalo = setTimeout(function vitoria (){
+        acertos = document.querySelectorAll(".Acertou")
+        cartasTotais = document.querySelectorAll(".card")
+        numeroDeJogadas++
+        if (acertos.length == cartasTotais.length) {
+            alert(`VOCÊ GANHOU EM ${numeroDeJogadas} JOGADAS!`)
+        }
+    },100)
 }
+
 
 function syncDelay(milliseconds) {
     var start = new Date().getTime();
